@@ -6,11 +6,11 @@
   <img src="https://img.shields.io/badge/Zero_Dependencies-✓-purple?style=for-the-badge" alt="Zero Dependencies"/>
 </p>
 
-# 🛡️ LİMMA Benchmark Suite
+# 🛡️ Limma Benchmark Suite
 
-**An open-source, engine-agnostic benchmark for evaluating web vulnerability detection tools.**
+**Limma's official validation suite for evidence-based security detection. Engine-agnostic and open-source.**
 
-How accurate is your security scanner? This benchmark provides a controlled environment with **62 test endpoints** across **17 attack categories** — each with a known ground truth — so you can objectively measure detection accuracy, false positive rates, and blind spots.
+This benchmark provides a controlled environment with **62 test endpoints** across **17 attack categories** — each with a known ground truth — enabling precise measurement of detection accuracy, false positive discipline, and blind spots across releases.
 
 ---
 
@@ -28,9 +28,21 @@ This benchmark solves that by providing:
 
 ---
 
+## 🎯 Why Limma Uses This Benchmark
+
+Limma employs this suite as a core quality gate to enforce engineering discipline:
+
+- **Evidence-Based Detection** — Every finding must be grounded in observable, reproducible test behavior rather than pattern matching alone
+- **Zero False Positive Discipline** — The 11 "secure" endpoints act as a tripwire; any regression immediately fails the build
+- **Release-to-Release Accuracy Tracking** — Metrics are versioned and compared across commits to detect capability degradation or improvement
+- **Real-World Attack Fidelity** — Test cases mirror actual exploitation techniques, not synthetic signatures
+
+---
+
 ## 📋 Table of Contents
 
 - [Why This Benchmark?](#-why-this-benchmark)
+- [Why Limma Uses This Benchmark](#-why-limma-uses-this-benchmark)
 - [Attack Categories](#-attack-categories)
 - [Quick Start](#-quick-start)
 - [Integrating Your Scanner](#-integrating-your-scanner)
@@ -276,5 +288,5 @@ MIT License — see [LICENSE](LICENSE) for details.
 ---
 
 <p align="center">
-  <sub>Open source security benchmark suite</sub>
+  <sub>Engineered by <a href="https://pentexa.com">Pentexa</a> for the Limma Project</sub>
 </p>

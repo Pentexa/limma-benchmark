@@ -1167,7 +1167,7 @@ const server = http.createServer((req, res) => {
 
 server.listen(MOCK_PORT, async () => {
     console.log(`\n================================================================================`);
-    console.log(`🚀 Security Scanner Benchmark Suite`);
+    console.log(`🚀 Limma Benchmark Suite`);
     console.log(`📡 Mock Server Running on Target Port: ${MOCK_PORT}`);
     console.log(`Total Scenarios: ${testCases.length}`);
     console.log(`================================================================================\n`);
@@ -1180,7 +1180,7 @@ server.listen(MOCK_PORT, async () => {
     };
 
     // Accumulators for reports
-    let markdownReport = `# Security Scanner Benchmark Report\n\n`;
+    let markdownReport = `# Limma Benchmark Report\n\n`;
     markdownReport += `* **Generated on:** \`${new Date().toISOString()}\`\n`;
     markdownReport += `* **Total Endpoints Tested:** ${testCases.length}\n\n`;
     markdownReport += `## Execution Breakdown\n\n`;

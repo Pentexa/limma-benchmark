@@ -1,5 +1,5 @@
 {
-  "name": "security-scanner-benchmark",
+  "name": "limma-benchmark",
   "version": "2.0.0",
   "description": "Open-source, engine-agnostic security benchmark suite. Tests 62 endpoints across 17 attack categories to measure vulnerability detection accuracy, false positive rates, and blind spots.",
   "main": "fp_benchmark.js",

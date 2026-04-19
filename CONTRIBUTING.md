@@ -1,4 +1,4 @@
-# Contributing to LİMMA Benchmark Suite
+# Contributing to Limma Benchmark Suite
 
 Thank you for your interest in improving the benchmark! This document provides guidelines for contributing.
 
