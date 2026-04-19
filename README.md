@@ -84,8 +84,8 @@ The suite covers **17 distinct categories**, ranging from basic misconfiguration
 ### Step 1: Clone & Enter
 
 ```bash
-git clone https://github.com/Pentexa/security-scanner-benchmark.git
-cd security-scanner-benchmark
+git clone https://github.com/Pentexa/limma-benchmark.git
+cd limma-benchmark
 ```
 
 ### Step 2: Configure Your Scanner

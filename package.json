@@ -25,7 +25,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Pentexa/security-scanner-benchmark.git"
+    "url": "https://github.com/Pentexa/limma-benchmark.git"
   },
   "engines": {
     "node": ">=16.0.0"

@@ -51,8 +51,8 @@ If you find incorrect ground truth values or engine behavior:
 
 ```bash
 # Clone your fork
-git clone https://github.com/YOUR_USERNAME/security-scanner-benchmark.git
-cd security-scanner-benchmark
+git clone https://github.com/YOUR_USERNAME/limma-benchmark.git
+cd limma-benchmark
 
 # Run the benchmark (requires a scanner API on the configured port)
 node fp_benchmark.js
