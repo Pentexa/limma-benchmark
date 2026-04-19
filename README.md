@@ -1,16 +1,24 @@
 <p align="center">
+  <img src="https://img.shields.io/badge/Version-1.0.0-blue?style=for-the-badge" alt="Version"/>
   <img src="https://img.shields.io/badge/Tests-62_Endpoints-blue?style=for-the-badge" alt="Tests"/>
   <img src="https://img.shields.io/badge/Categories-17-orange?style=for-the-badge" alt="Categories"/>
   <img src="https://img.shields.io/badge/Node.js-≥16-green?style=for-the-badge&logo=node.js" alt="Node"/>
   <img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" alt="License"/>
-  <img src="https://img.shields.io/badge/Zero_Dependencies-✓-purple?style=for-the-badge" alt="Zero Dependencies"/>
 </p>
 
 # 🛡️ Limma Benchmark Suite
 
-**Limma's official validation suite for evidence-based security detection. Engine-agnostic and open-source.**
+**Zero false positives. Verified by design.**
 
-This benchmark provides a controlled environment with **62 test endpoints** across **17 attack categories** — each with a known ground truth — enabling precise measurement of detection accuracy, false positive discipline, and blind spots across releases.
+A controlled evaluation environment with **62 test endpoints** across **17 attack categories** — each with a known ground truth — enabling precise measurement of detection accuracy, false positive discipline, and blind spots.
+
+---
+
+## About
+
+This benchmark is the primary validation mechanism for [Limma](https://pentexa.com), a security detection engine focused on evidence-based analysis and zero false positive discipline. While designed for Limma's internal quality gates, the suite is intentionally **engine-agnostic** — any scanner that accepts a URL and returns structured findings can be evaluated.
+
+The ground-truth dataset, evaluation logic, and methodology are open-source to enable independent verification and community contribution.
 
 ---
 
@@ -41,9 +49,11 @@ Limma employs this suite as a core quality gate to enforce engineering disciplin
 
 ## 📋 Table of Contents
 
+- [About](#about)
 - [Why This Benchmark?](#-why-this-benchmark)
 - [Why Limma Uses This Benchmark](#-why-limma-uses-this-benchmark)
 - [Attack Categories](#-attack-categories)
+- [Example Output](#example-output)
 - [Quick Start](#-quick-start)
 - [Integrating Your Scanner](#-integrating-your-scanner)
 - [How It Works](#-how-it-works)
@@ -237,6 +247,12 @@ After execution, two report files are generated:
 | `fp_benchmark_report.csv` | CSV | Machine-readable data for custom analysis, charts, or tracking over time |
 
 These files are in `.gitignore` — each user generates their own results.
+
+---
+
+## 📄 Example Output
+
+See [`examples/sample-output.md`](examples/sample-output.md) for a complete execution example showing true positives, false positives, and detailed findings without requiring a local run.
 
 ---
 
