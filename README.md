@@ -6,7 +6,7 @@
   <img src="https://img.shields.io/badge/Zero_Dependencies-✓-purple?style=for-the-badge" alt="Zero Dependencies"/>
 </p>
 
-# 🛡️ Security Scanner Benchmark Suite
+# 🛡️ LİMMA Benchmark Suite
 
 **An open-source, engine-agnostic benchmark for evaluating web vulnerability detection tools.**
 
