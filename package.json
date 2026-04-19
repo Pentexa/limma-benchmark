@@ -1,0 +1,33 @@
+{
+  "name": "security-scanner-benchmark",
+  "version": "2.0.0",
+  "description": "Open-source, engine-agnostic security benchmark suite. Tests 62 endpoints across 17 attack categories to measure vulnerability detection accuracy, false positive rates, and blind spots.",
+  "main": "fp_benchmark.js",
+  "scripts": {
+    "start": "node fp_benchmark.js",
+    "benchmark": "node fp_benchmark.js"
+  },
+  "keywords": [
+    "security",
+    "benchmark",
+    "vulnerability-detection",
+    "false-positive",
+    "web-security",
+    "penetration-testing",
+    "security-headers",
+    "CORS",
+    "CSP",
+    "XSS",
+    "SSRF",
+    "security-scanner"
+  ],
+  "author": "Pentexa",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Pentexa/security-scanner-benchmark.git"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

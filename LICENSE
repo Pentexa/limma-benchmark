@@ -1,28 +1,21 @@
-# Limma Benchmark License
+MIT License
 
-Copyright (c) 2026 Limma
+Copyright (c) 2026 Security Scanner Benchmark Contributors
 
-Permission is hereby granted to any person to use, copy, modify, and distribute this software and associated documentation files (the "Benchmark") for **non-commercial purposes only**, subject to the following conditions:
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-1. The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Benchmark.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-2. The Benchmark may not be used for commercial purposes without explicit written permission from the author.
-
-3. Any public use, research, or publication based on this Benchmark must include proper attribution to "Limma Benchmark Suite".
-
-4. The Benchmark is provided "as is", without warranty of any kind, express or implied.
-
----
-
-## Commercial Use
-
-If you wish to use this Benchmark for commercial purposes (including integration into paid tools, services, or platforms), please contact the author for licensing.
-
----
-
-## Summary
-
-* ✅ Personal use allowed
-* ✅ Research & educational use allowed
-* ❌ Commercial use restricted
-* ❌ Reselling or embedding in paid tools without permission is prohibited
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

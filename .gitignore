@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+
+# Generated benchmark reports (users generate their own)
+fp_benchmark_report.md
+fp_benchmark_report.csv
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+npm-debug.log*

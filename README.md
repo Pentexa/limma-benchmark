@@ -1,162 +1,280 @@
-# Limma Benchmark Suite
+<p align="center">
+  <img src="https://img.shields.io/badge/Tests-62_Endpoints-blue?style=for-the-badge" alt="Tests"/>
+  <img src="https://img.shields.io/badge/Categories-17-orange?style=for-the-badge" alt="Categories"/>
+  <img src="https://img.shields.io/badge/Node.js-≥16-green?style=for-the-badge&logo=node.js" alt="Node"/>
+  <img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" alt="License"/>
+  <img src="https://img.shields.io/badge/Zero_Dependencies-✓-purple?style=for-the-badge" alt="Zero Dependencies"/>
+</p>
 
-Evidence-based web security benchmark suite designed to evaluate real-world detection accuracy with a zero false positive tolerance model.
+# 🛡️ Security Scanner Benchmark Suite
 
----
+**An open-source, engine-agnostic benchmark for evaluating web vulnerability detection tools.**
 
-## 🧠 Overview
-
-This benchmark simulates real-world web application behavior using a controlled mock HTTP server and structured test scenarios.
-
-Each scenario includes:
-
-* A predefined **ground truth** (`is_malicious`)
-* A fully controlled HTTP response (headers + body)
-* An expected detection outcome
-
-This allows precise, reproducible evaluation of security scanning engines.
+How accurate is your security scanner? This benchmark provides a controlled environment with **62 test endpoints** across **17 attack categories** — each with a known ground truth — so you can objectively measure detection accuracy, false positive rates, and blind spots.
 
 ---
 
-## 🎯 What This Benchmark Covers
+## 🤔 Why This Benchmark?
 
-The suite includes a wide range of real-world and adversarial scenarios:
+Security scanners are only as good as what they catch — and what they _don't_ falsely flag. Without a standardized test suite, it's nearly impossible to compare scanners or track improvements over time.
 
-* Security headers (CSP, HSTS, X-Frame-Options, etc.)
-* Information disclosure (server versions, framework leaks)
-* CORS misconfigurations
-* CMS fingerprinting (WordPress, etc.)
-* Cookie and session security issues
-* Redirects, SSRF indicators, internal leaks
-* Advanced evasion techniques (header case confusion, obfuscation)
-* Encoding attacks (Unicode, Base64, HTML entities)
-* Modern vulnerabilities (SSTI, Log4j patterns, deserialization)
-* API vulnerabilities (IDOR, JSONP, GraphQL introspection)
-* WAF/CDN bypass patterns
-* Blind attack indicators (timing, error discrepancies)
-* File exposure & path traversal
-* JWT weaknesses
-* False positive traps (educational content, safe contexts)
+This benchmark solves that by providing:
+
+- ✅ **Ground-truth labeled endpoints** — Every test case has a known expected result (vulnerable or secure)
+- ✅ **Reproducible environment** — A self-contained mock server, no external dependencies
+- ✅ **Engine-agnostic design** — Works with any scanner that accepts a URL and returns findings
+- ✅ **Comprehensive coverage** — From basic misconfigurations to expert-level evasion techniques
+- ✅ **Zero dependencies** — Built entirely on Node.js built-in modules
 
 ---
 
-## ⚙️ Evaluation Model
+## 📋 Table of Contents
 
-This benchmark uses an **evidence-driven detection model**:
-
-* Only **Medium, High, and Critical** findings are considered actionable
-* Low/Informational findings are treated as noise
-* Each detection must be backed by runtime evidence
-
-### Resulting Behavior
-
-* ✅ Zero False Positives (strict validation)
-* ⚠️ Controlled False Negatives (intentional tradeoff)
-
-This reflects real-world security priorities where accuracy is preferred over noisy detection.
-
----
-
-## 🔬 How It Works
-
-1. A mock HTTP server simulates all test endpoints
-2. Each endpoint returns a controlled response
-3. Limma scans each endpoint via API
-4. Results are compared against ground truth (`is_malicious`)
-5. Final metrics are calculated:
-
-* True Positive
-* False Positive
-* True Negative
-* False Negative
+- [Why This Benchmark?](#-why-this-benchmark)
+- [Attack Categories](#-attack-categories)
+- [Quick Start](#-quick-start)
+- [Integrating Your Scanner](#-integrating-your-scanner)
+- [How It Works](#-how-it-works)
+- [Understanding Results](#-understanding-results)
+- [Metrics Explained](#-metrics-explained)
+- [Output Reports](#-output-reports)
+- [Adding Custom Test Cases](#-adding-custom-test-cases)
+- [Contributing](#-contributing)
+- [License](#-license)
 
 ---
 
-## 🚀 Running the Benchmark
+## 🎯 Attack Categories
 
-### Requirements
+The suite covers **17 distinct categories**, ranging from basic misconfigurations to expert-level evasion techniques:
 
-* Node.js
-* Limma API running locally
+| # | Category | Tests | Difficulty |
+|---|---|---|---|
+| 1 | Perfectly Secure Endpoints | 4 | Baseline |
+| 2 | Information Disclosure | 4 | Easy |
+| 3 | Security Misconfigurations | 5 | Easy |
+| 4 | CORS Misconfigurations | 2 | Medium |
+| 5 | CMS Fingerprinting | 1 | Medium |
+| 6 | Edge Cases (FP Avoidance) | 2 | Medium |
+| 7 | Evasion & Trickery | 5 | Hard |
+| 8 | Advanced Encoding & Obfuscation | 4 | Hard |
+| 9 | Cookie & Session Security | 4 | Medium |
+| 10 | Open Redirect & SSRF | 4 | Hard |
+| 11 | Modern Attack Vectors | 5 | Expert |
+| 12 | WAF/CDN Bypass | 4 | Expert |
+| 13 | API & JSONP Vulnerabilities | 4 | Hard |
+| 14 | Blind/Zero-Knowledge Attacks | 4 | Expert |
+| 15 | File Upload & Path Traversal | 4 | Hard |
+| 16 | False Positive Traps | 5 | Expert |
+| 17 | JWT & Token Security | 1 | Medium |
 
-### Start Benchmark
+> **Baseline (Secure):** 11 endpoints expected to be clean — tests your scanner's ability to avoid false positives.
+>
+> **Vulnerable:** 51 endpoints with real vulnerabilities — tests your scanner's detection capability.
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- **Node.js** ≥ 16.x ([Download](https://nodejs.org/))
+- **A security scanner** with an HTTP API that accepts URLs to scan
+
+### Step 1: Clone & Enter
 
 ```bash
-node benchmark.js
+git clone https://github.com/Pentexa/security-scanner-benchmark.git
+cd security-scanner-benchmark
 ```
 
-### Default Configuration
+### Step 2: Configure Your Scanner
 
-* Mock server runs on: `http://localhost:9001`
-* Limma API endpoint: `http://127.0.0.1:8900/master-report`
+Open `fp_benchmark.js` and set your scanner's API endpoint:
 
----
+```javascript
+// Line 5 — Point this to your security scanner's API
+const SCANNER_API = "http://127.0.0.1:8900/master-report";
+```
 
-## 📊 Output
+### Step 3: Run
 
-After execution, the following reports are generated:
+```bash
+node fp_benchmark.js
+```
 
-* `fp_benchmark_report.md` → Human-readable report
-* `fp_benchmark_report.csv` → Structured dataset
-
----
-
-## 🧩 Design Philosophy
-
-This benchmark does not reward aggressive detection.
-
-It prioritizes:
-
-* Verified findings
-* Reproducible scenarios
-* Real-world accuracy
-
-Instead of asking:
-
-> "Did the scanner find something?"
-
-It asks:
-
-> "Did the scanner find something real?"
+That's it. No `npm install` needed — zero external dependencies.
 
 ---
 
-## 🔓 Transparency
+## 🔌 Integrating Your Scanner
 
-This benchmark is fully open and reproducible.
+This benchmark is designed to work with **any** security scanner. You only need to modify two things in `fp_benchmark.js`:
 
-You can:
+### 1. Scanner API Endpoint
 
-* Inspect all scenarios
-* Modify test cases
-* Run your own comparisons
-* Evaluate different tools under identical conditions
+```javascript
+// Set your scanner's URL analysis endpoint
+const SCANNER_API = "http://your-scanner-host:port/analyze";
+```
 
----
+### 2. Response Parsing
 
-## ⚠️ Note
+The benchmark needs to understand your scanner's output format. Locate the response parsing section (~line 1204) and adapt it to match your scanner's JSON structure:
 
-Some scenarios are intentionally adversarial and designed to:
+```javascript
+// The benchmark expects to determine:
+// - Did the scanner find any security issues? (true/false)
+// - What findings were reported? (array of issues)
+```
 
-* Trigger false positives in weak scanners
-* Bypass naive detection logic
-* Test normalization and parsing robustness
-
----
-
-## 🧪 Purpose
-
-This benchmark is designed for:
-
-* Security tool evaluation
-* Detection accuracy testing
-* Research and experimentation
-* Engineering validation of scanning engines
+**The contract is simple:**
+| Direction | What happens |
+|---|---|
+| **Benchmark → Scanner** | Sends a URL to analyze |
+| **Scanner → Benchmark** | Returns JSON with detected findings |
 
 ---
 
-## 🏁 Final Thought
+## ⚙️ How It Works
 
-Accuracy without evidence is noise.
+```
+┌─────────────────────┐                                  ┌─────────────────────┐
+│                     │    POST { url: "http://..." }     │                     │
+│   Mock Server       │  ──────────────────────────────▶  │   Your Security     │
+│   (Port 9001)       │                                   │   Scanner           │
+│                     │  ◀──────────────────────────────  │                     │
+│   62 Test Endpoints │    Analysis Results (JSON)        │   (Any Engine)      │
+└─────────────────────┘                                   └─────────────────────┘
+         ▲                                                         │
+         │              HTTP GET (scanner fetches endpoint)         │
+         └─────────────────────────────────────────────────────────┘
+```
 
-This benchmark exists to measure the difference.
+1. **Mock Server** starts on port `9001` with 62 test endpoints — each crafted with specific headers, cookies, and response bodies
+2. For each test case, the benchmark sends the target URL to **your scanner's** API
+3. Your scanner fetches the mock endpoint, analyzes it, and returns its findings
+4. The benchmark compares findings against the **ground truth** label (`is_malicious: true/false`)
+5. Results are printed live and saved as Markdown + CSV reports
+
+---
+
+## 📊 Understanding Results
+
+### Live Console Output
+
+Each endpoint is tested and results appear in real-time:
+
+```
+[Secure                   ] safe_1_perfect_headers         -> ✅ TRUE NEGATIVE
+[Disclosure               ] vuln_1_server_version          -> ✅ TRUE POSITIVE
+[Misconfiguration         ] vuln_5_missing_csp             -> ✅ TRUE POSITIVE
+[FP Traps                 ] fp_1_security_education_site   -> ✅ TRUE NEGATIVE
+[Hardcore (Evasion)       ] hard_1_header_case_confusion   -> ❌ FALSE NEGATIVE (Missed!)
+```
+
+### Summary Report
+
+```
+================================================================================
+                         BENCHMARK FINAL METRICS
+================================================================================
+Time Elapsed                : 513.83 seconds
+Total Endpoints Scanned     : 62
+Expected SECURE Targets     : 11
+Expected VULN Targets       : 51
+--------------------------------------------------------------------------------
+✅ True Positives (Found)   : 40
+❌ False Positives (Noisy)  : 0
+✅ True Negatives (Clean)   : 11
+❌ False Negatives (Missed) : 11
+--------------------------------------------------------------------------------
+🎯 Overall Accuracy         : 82.26%
+📢 False Positive Rate      : 0.00%
+⚠️  False Negative Rate      : 21.57%
+================================================================================
+```
+
+---
+
+## 📐 Metrics Explained
+
+| Metric | Formula | What It Tells You |
+|---|---|---|
+| **True Positive (TP)** | — | Vulnerability correctly detected |
+| **False Positive (FP)** | — | Safe endpoint incorrectly flagged as vulnerable |
+| **True Negative (TN)** | — | Safe endpoint correctly identified as clean |
+| **False Negative (FN)** | — | Vulnerability that was missed |
+| **Overall Accuracy** | `(TP + TN) / Total` | General detection reliability |
+| **FP Rate** | `FP / (TN + FP)` | How noisy is your scanner? Lower is better |
+| **FN Rate** | `FN / (TP + FN)` | How many threats are slipping through? Lower is better |
+
+> **Ideal scanner:** 100% accuracy, 0% FP rate, 0% FN rate.
+>
+> **In practice:** Most scanners trade off between FP and FN rates — this benchmark helps you see exactly where that trade-off stands.
+
+---
+
+## 📁 Output Reports
+
+After execution, two report files are generated:
+
+| File | Format | Use Case |
+|---|---|---|
+| `fp_benchmark_report.md` | Markdown | Human-readable breakdown with per-test results and summary metrics |
+| `fp_benchmark_report.csv` | CSV | Machine-readable data for custom analysis, charts, or tracking over time |
+
+These files are in `.gitignore` — each user generates their own results.
+
+---
+
+## ➕ Adding Custom Test Cases
+
+Extend the benchmark by adding entries to the `testCases` array in `fp_benchmark.js`:
+
+```javascript
+{
+    category: "Your Category",
+    id: "unique_test_id",
+    path: "/your/test/path",
+    is_malicious: true,  // true = should be detected, false = should pass clean
+    mockResponse: {
+        status: 200,
+        headers: {
+            "Content-Type": "text/html",
+            // Add headers relevant to your test scenario
+        },
+        body: "<html><body>Your crafted response</body></html>"
+    }
+}
+```
+
+**Rules for good test cases:**
+- Each `id` and `path` must be unique across the entire suite
+- Isolate one vulnerability per test — don't stack multiple issues
+- For secure endpoints (`is_malicious: false`), configure all security headers properly
+- Add a comment above the test case explaining the expected behavior
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for full guidelines.
+
+**Ways to contribute:**
+- 🐛 **New test cases** — Cover attack vectors not yet in the suite
+- 🔌 **Scanner adapters** — Share integration configs for popular scanners
+- 📊 **Metrics & reporting** — Improve visualization or add new scoring methods
+- 📝 **Documentation** — Fix, improve, or translate
+
+---
+
+## 📄 License
+
+MIT License — see [LICENSE](LICENSE) for details.
+
+---
+
+<p align="center">
+  <sub>Open source security benchmark suite</sub>
+</p>
