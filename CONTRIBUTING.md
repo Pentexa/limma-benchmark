@@ -1,4 +1,4 @@
-# Contributing to Security Scanner Benchmark Suite
+# Contributing to LİMMA Benchmark Suite
 
 Thank you for your interest in improving the benchmark! This document provides guidelines for contributing.
 
